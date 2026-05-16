@@ -34,6 +34,35 @@ if(ENABLE_QT)
   )
 endif()
 
-target_sources(${CMAKE_PROJECT_NAME} PRIVATE src/plugin-main.c)
+target_sources(
+  ${CMAKE_PROJECT_NAME}
+  PRIVATE
+    src/plugin-main.cpp
+    src/piano-source.cpp
+    src/piano-source.h
+    src/midi-input.cpp
+    src/midi-input.h
+    extern/rtmidi/RtMidi.cpp
+    extern/rtmidi/RtMidi.h
+    data/locale/en-US.ini
+    data/locale/ru-RU.ini
+)
+
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE src extern/rtmidi)
+
+if(WIN32)
+  target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE __WINDOWS_MM__)
+  target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE winmm)
+elseif(APPLE)
+  target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE __MACOSX_CORE__)
+  target_link_libraries(
+    ${CMAKE_PROJECT_NAME}
+    PRIVATE "-framework CoreMIDI" "-framework CoreAudio" "-framework CoreFoundation"
+  )
+elseif(UNIX)
+  find_package(ALSA REQUIRED)
+  target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE __LINUX_ALSA__)
+  target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ALSA::ALSA)
+endif()
 
 set_target_properties_plugin(${CMAKE_PROJECT_NAME} PROPERTIES OUTPUT_NAME ${_name})

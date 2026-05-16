@@ -33,13 +33,13 @@
     },
     "platformConfig": {
         "macos": {
-            "bundleId": "com.example.plugintemplate-for-obs"
+            "bundleId": "com.hack1exe.obs-midikeyboard"
         }
     },
-    "name": "plugintemplate-for-obs",
-    "displayName": "Plugin Template for OBS",
+    "name": "obs-midikeyboard",
+    "displayName": "MIDI Piano Keyboard",
     "version": "1.0.0",
-    "author": "Your Name Here",
-    "website": "https://example.com",
-    "email": "me@example.com"
+    "author": "hack1exe",
+    "website": "https://github.com/hack1exe/obs-midikeyboard",
+    "email": "hack1exe@example.com"
 }

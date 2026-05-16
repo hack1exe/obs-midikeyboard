@@ -6,7 +6,9 @@
 !/build-aux
 !/cmake
 !/data
+!/extern
 !/src
+!/img
 !.clang-format
 !.gersemirc
 !.gitignore
